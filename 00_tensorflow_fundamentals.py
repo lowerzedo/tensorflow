@@ -226,3 +226,70 @@ tensor / 10
 
 # We can use the tensorflow built-in function too
 tf.multiply(tensor, 10)
+
+"""## Matrix multiplications
+in ML, matrix multiplication is one of the most common tensor operations
+
+There are two rules tensors (or matrices) need to fulfil if we are going to multiply them
+1. The inner dimensions must match
+
+  ( the number of columns in the first matrix must be the same as the number of rows in the second matrix. For example, if the first matrix has 3 columns, the second matrix must have 3 rows.)
+2. The resulting matrix has the shape of the inner dimensions
+
+  (After multiplying the matrices, the new matrix (the result) will have the same number of rows as the first matrix and the same number of columns as the second matrix. For example, if the first matrix has 2 rows and the second matrix has 4 columns, the resulting matrix will have 2 rows and 4 columns.
+"""
+
+# Matrix multpl in ts
+print(tensor)
+tf.matmul(tensor, tensor)
+
+tensor_a = tf.constant([[[1, 2, 5],
+                         [7, 2, 1],
+                         [3, 3, 3]]])
+tensor_a
+
+tensor_b = tf.constant([[3, 5], [6,7], [1,8]])
+tensor_b
+
+multpication_ab = tf.matmul(tensor_a, tensor_b)
+multpication_ab
+
+# Matrix multpl with Python operator "@"
+tensor_a @ tensor_b
+
+"""**Dot Product**
+
+Matrix multiplication is also reffered to Dot Product
+
+Matrix multipl can be done using
+* `tf.matmul()`
+*`tf.tensordot()`
+"""
+
+X = tf.constant([[1,2],[3,4],[5,6]])
+Y = tf.constant([[7,8],[9,10],[11,12]])
+
+X,Y
+
+# Perform the dot product on X and Y (requires X and Y to be transposing)
+tf.tensordot(tf.transpose(X), Y, axes=1)
+
+#  Perform matrix multiplication between X and Y (transposed)
+tf.matmul(X, tf.transpose(Y))
+
+#  Perform matrix multiplication between X and Y (reshaped)
+tf.matmul(X, tf.reshape(Y, (2,3)))
+
+# Check the values of Y, reshaped Y and transposed Y
+
+print("Normal Y")
+print(Y, "\n")
+
+print("Reshaped Y")
+print(tf.reshape(Y, (2,3)),"\n")
+
+print("Transposed Y")
+print(tf.transpose(Y))
+
+"""Generally when performing multiplications on two tensors and one of the tensors doesnt line up, you will use **transpose** (rather than reshape) one of the tensors to satisfy the matrix multiplication rules"""
+
